@@ -162,8 +162,8 @@
                         document.getElementById("messageHTML").innerHTML = code;
                     }
                     //event and the object
-                    var BTN = document.getElementById("tryit");
-                    btn.addEventListener("click", changeHTML, flase)
+                    var cName = document.getElementById("tryit");
+                    cName.addEventListener("click", changeHTML, false)
 
 
 
@@ -229,8 +229,8 @@
         </div>
 
         <div class="practice">
-            <h1>Decision statement - If </h1>
-            Honda Accord Used Car price estimate,
+            <h1>Decision statement - If 
+            Honda Accord Used Car price estimate,</h1>
             <p>Please enter the year of the car
                 <select id="year">
                     <option> 2003</option>
@@ -328,7 +328,7 @@
         <div class="practice">
             <h1> Switch practice -- Insurance Application</h1>
             <p> Choose your coverage
-                <input type="radio" name="coverage" id="c1"value="100000">100000
+                <input type="radio" name="coverage" id="c1" value="100000" checked>100000
                 <input type="radio" name="coverage" value="200000">200000
                 <input type="radio" name="coverage" value="300000">300000
 
@@ -344,7 +344,7 @@
                     <option> 55-59 </option>
                     <option> 60-64 </option>
                 </select>
-
+ 
             </p>
             <p>
                 <input type="button" value="Check Premium">
@@ -353,18 +353,58 @@
 
             </p>
             <script>
-//complete
-function getpremium(){
-//get element by name
-var coverage = document.getElementsByName("coverage")[0].value;
-var otherway = document.querySelector('input[name="coverage"]:checked').value;
-console.log(coverage,otherway);
+                //complete
+                function getpremium() {
+                    //get coverage input
+                    var Coverage = parseFloat(document.querySelector('input[name="coverage"]:checked').value);
+                    console.log("the coverage is" + coverage);
+
+                    var ageindex = document.getElementById("agegroup").selectedIndex;
+                    console.log("the age index is" + ageindex);
+
+                    //var
+                    var Premium = 0;
+                    var base = 10;
+                    var agefactor = 0;
+                    switch (ageindex) {
+                        case 0:
+                            agefactor = 0.08;
+                            break;
+                        case 1:
+                            agefactor = 0.09;
+                            break;
+                        case 2:
+                            agefactor = 0.1;
+                            break;
+                        case 3:
+                            agefactor = 0.17;
+                            break;
+                        case 4:
+                            agefactor = 0.29;
+                            break;
+                        case 5:
+                            agefactor = 0.48;
+                            break;
+                        case 6:
+                            agefactor = 0.75;
+                            break;
+                        case 7:
+                            agefactor = 1.17;
+                            break;
+
+                        default:
+                            break;
+
+                    }
+                    Premium = base + agefactor * coverage / 1000;
+                    console.log("the Premium is " + Premium);
+
+                }
 
 
-}
-
-var radioE = document.getElementById("cover1").checked;
-console.log(radioE);
+                var radioE = document.getElementById("cover1");
+                console.log(radioE);
+                document.querySelector('input[value="Check Premium"]').addEventListener("click", getpremium, false);
 
             </script>
 
@@ -389,140 +429,224 @@ console.log(radioE);
             <!--  Input number box -->
             <p> N = <input type="number" min="1" max="10" id="inputnumber2"> </p>
             <p>
-                <input type="button" value="Click for multiplication table">
+                <input type="button" id="dotable" value="Click for multiplication table">
             </p>
 
             <!-- output section -->
-            <div id="output">
-
-
-            </div>
-
-        </div>
-
-
-        <div class="practice">
-            <h1>For loop practice 3 -Math Drill </h1>
-            <p> N = <input type="number" min="1" max="10" id="inputnumber3"> </p>
-
-            <p>
-                <input type="button" value="Click for multiplication drill">
-            </p>
-            <script src="js\mathdrill.js">
-            </script>
-        </div>
-
-        <div class="practice">
-            <h1> A simple JavaScript Quiz</h1>
-            <p> A simple JavaScript Quiz </p>
-            <p>Target: Generate a simple substract and add problems using JavaScript and then check the answers</p>
-            <a href="quiz1.html">Do your practice in quiz1.html</a>
-        </div>
-
-        <div class="practice">
-            <h1>Change Attribute -- Rolling a dice </h1>
-            <p> <input type="button" id="roll" value="roll" /> </p>
-            <p> <img src="img/die1.png"> </p>
-            <table>
-                <tr>
-                    <th>Result</th>
-                    <th>1</th>
-                    <th>2</th>
-                    <th>3</th>
-                    <th>4</th>
-                    <th>5</th>
-                    <th>6</th>
-                </tr>
-                <tr>
-                    <th>Statistics</th>
-                    <td id="r1"></td>
-                    <td id="r2"></td>
-                    <td id="r3"></td>
-                    <td id="r4"></td>
-                    <td id="r5"></td>
-                    <td id="r6"></td>
-                </tr>
-            </table>
-
-        </div>
-
-
-        <div class="practice">
-            <h1> Array example - Image banner</h1>
-            <div class="img-container-hide">
-                <img src="img/usca1.jpg" alt="usca" />
-            </div>
-            <div class="img-container-hide">
-                <img src="img/usca2.jpg" alt="usca" />
-            </div>
-            <div class="img-container-hide">
-                <img src="img/usca3.jpg" alt="usca" />
-            </div>
-            <div class="img-container-hide">
-                <img src="img/usca4.jpg" alt="usca">
-            </div>
-            <div class="img-container-hide">
-                <img src="img/usca5.jpg" alt="usca">
+            <div id="Looptable">
             </div>
             <script>
+                function maketable() {
+                    console.log("button clicked!-- in marketable");
+                    var num = parseInt(document.getElementById("inputnumber2").value);
+                    var output = "";
+                    output += "<table>";
+                    for (var i = 1; i<=num; i++) {
+                        output += "<tr>";
+
+                        for (var j = 1; j <= num; j++) {
+                            product = i * j;
+                            output += "<td>" + i + "x" + j + "=" + product + "</td>";
+
+
+                        }
+                        output += "</tr>";
+                    }
+                    output += "</table";
+                    console.log(output);
+                    document.getElementById("looptable").innerHTML = output;
+
+
+
+
+                    document.getElementById("dotable").addEventListener("click", maketable, false);
+                }
+
+
+
+
+
 
             </script>
 
-
         </div>
 
+    </div>
 
-        <div class="practice">
-            <h1>JavaScript Object </h1>
-            <p> Hotel registration </p>
-            <div>
-                <form>
-                    <p>
-                        Name: <input type="text" id="name">
-                    </p>
-                    <p>
-                        Check in: <input type="date" id="checkin"> Check out: <input type="date" id="checkout">
-                    </p>
-                    <p>
-                        Number of guest: <input type="number" id="num" min="0" max="5">
-                    </p>
-                    <p>
-                        Room Type: <select id="room">
-                            <option>1 Bedroom Smaller Suite $139 </option>
-                            <option> 1 Bedroom Larger Suite $169 </option>
-                            <option> 1 Bedroom Junior Suite $289</option>
-                            <option> Grand Suite $289</option>
-                        </select>
-                    </p>
-                    <p>
-                        <input id="submit" type="button" value="submit">
-                    </p>
-                    <p>
-                        <input id="lists" type="button" value="List current reservations">
-                    </p>
-                </form>
-                <script src="js/hotel.js"></script>
-            </div>
 
+    <div class="practice">
+        <h1>For loop practice 3 -Math Drill </h1>
+        <p> N = <input type="number" min="1" max="10" id="inputnumber3"> </p>
+
+        <p>
+            <input type="button" value="Click for multiplication drill">
+        </p>
+        <script src="js\mathdrill.js">
+        </script>
+    </div>
+
+    <div class="practice">
+        <h1> A simple JavaScript Quiz</h1>
+        <p> A simple JavaScript Quiz </p>
+        <p>Target: Generate a simple substract and add problems using JavaScript and then check the answers</p>
+        <a href="quiz1.html">Do your practice in quiz1.html</a>
+    </div>
+
+    <div class="practice">
+        <h1>Change Attribute -- Rolling a dice </h1>
+        <p> <input type="button" id="roll" value="roll" /> </p>
+        <p> <img id ="dieimg"src="img/die1.png"> </p>
+        <table>
+            <tr>
+                <th>Result</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+            </tr>
+            <tr>
+                <th>Statistics</th>
+                <td id="r1"></td>
+                <td id="r2"></td>
+                <td id="r3"></td>
+                <td id="r4"></td>
+                <td id="r5"></td>
+                <td id="r6"></td>
+            </tr>
+        </table>
+
+            <script>
+                var Statistics = [0,0,0,0,0,0];
+//event and event handler
+function rolldice(){
+    //get random number 1-6
+    var n = 6 //do random your self
+    Statistics[n-1] +=1;
+
+    //change the image src attribute
+    var e = document.getElementById("dieimage");
+    e.setAttribute("src","img/die"+n+".png");
+    //update the table
+    document.getElementById("r"+n).textContent = Statistics[n-1].toString();
+
+
+    //update image
+
+
+}
+//register event
+document.getElementById("roll").addEventListener("click",rolldice,false);
+
+
+
+                /*
+            //Array Practice
+            var testarray = [1,2,3,4,5,6];
+            testarray.pop(2);
+            console.log(testarray);
+            for (var i in testarray){
+                console.log(i,testarray[i])
+            }
+            testarray.forEach(e => console.log(e)); 
+            </script>
+
+    </div>
+
+
+    <div class="practice">
+        <h1> Array example - Image banner</h1>
+        <div class="img-container-hide">
+            <img src="img/usca1.jpg" alt="usca" />
+        </div>
+        <div class="img-container-hide">
+            <img src="img/usca2.jpg" alt="usca" />
+        </div>
+        <div class="img-container-hide">
+            <img src="img/usca3.jpg" alt="usca" />
+        </div>
+        <div class="img-container-hide">
+            <img src="img/usca4.jpg" alt="usca">
+        </div>
+        <div class="img-container-hide">
+            <img src="img/usca5.jpg" alt="usca">
+        </div>
+        
+        <script>
+var imagelist = document.querySelectorall(".img-container-hide");
+var index = 0;
+imagelist[index].setAttribute("class","img-container");
+
+function updatebanner{
+    imagelist[index].setAttribute("class","img-container-hide");
+    index++;
+    index = index % 5;
+    imagelist[index].setAttribute("class", "img-container");
+
+
+}
+//auto update the banner
+
+setInterval(updatebanner,5000);
+        </script>
+
+
+    </div>
+
+
+    <div class="practice">
+        <h1>JavaScript Object </h1>
+        <p> Hotel registration </p>
+        <div>
+            <form>
+                <p>
+                    Name: <input type="text" id="name">
+                </p>
+                <p>
+                    Check in: <input type="date" id="checkin"> Check out: <input type="date" id="checkout">
+                </p>
+                <p>
+                    Number of guest: <input type="number" id="num" min="0" max="5">
+                </p>
+                <p>
+                    Room Type: <select id="room">
+                        <option>1 Bedroom Smaller Suite $139 </option>
+                        <option> 1 Bedroom Larger Suite $169 </option>
+                        <option> 1 Bedroom Junior Suite $289</option>
+                        <option> Grand Suite $289</option>
+                    </select>
+                </p>
+                <p>
+                    <input id="submit" type="button" value="submit">
+                </p>
+                <p>
+                    <input id="lists" type="button" value="List current reservations">
+                </p>
+            </form>
+            <div id="guestlist"></div>
+            <script src="js/hotel.js"></script>
         </div>
 
-
-        <div class="practice">
-            <h1> HTML Canvas </h1>
-            <canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
-                Your browser does not support the HTML5 canvas tag.</canvas>
-            <div id="drawing"> </div>
-            <p> Some P5.js examples </p>
-            <script src="https://cdn.jsdelivr.net/npm/p5@1/lib/p5.min.js"></script>
-            <script src="js/draw.js"></script>
-        </div>
+    </div>
 
 
-        <div class="practice">
-            <h1>Continue other practices</h1>
-            <a href="JSON.html">JSON Practice</a>
-            <a href="element.html"> Element Practice </a>
-        </div>
+    <div class="practice">
+        <h1> HTML Canvas </h1>
+        <canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
+            Your browser does not support the HTML5 canvas tag.</canvas>
+        <div id="drawing"> </div>
+        <p> Some P5.js examples </p>
+        <script src="https://cdn.jsdelivr.net/npm/p5@1/lib/p5.min.js"></script>
+        <script src="js/draw.js"></script>
+    </div>
+
+
+    <div class="practice">
+        <h1>Continue other practices</h1>
+        <a href="JSON.html">JSON Practice</a>
+        <a href="element.html"> Element Practice </a>
+    </div>
 
 
 
